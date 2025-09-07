@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lirik Napis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #000; /* Deep black */
+            color: #ff5555; /* Bright red */
+        }
+        .song-card {
+            background: linear-gradient(145deg, #220000, #550000); /* Dark red gradient */
+            border: 2px solid #ff5555;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .song-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 85, 85, 0.5);
+        }
+        .search-bar input {
+            background: #220000;
+            border: 2px solid #ff5555;
+            color: #ff5555;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .search-bar input::placeholder {
+            color: #aa3333;
+        }
+        .search-bar button {
+            background: #ff5555;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background: #cc4444;
+        }
+        #song-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            #song-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            #song-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="p-8">
+    <h1 class="text-4xl font-bold text-center mb-6">Lirik Lagu</h1>
+    
+    <!-- Search Bar -->
+    <div class="search-bar text-center mb-8">
+        <input type="text" id="search" placeholder="Cari Lagu atau Artis" class="w-full max-w-md" />
+        <button onclick="searchSongs()">Search</button>
+    </div>
+    
+    <!-- Song Grid -->
+    <div id="song-grid">
+        <!-- Dummy Songs -->
+        <div class="song-card p-4 text-center" onclick="openLyrics('https://genius.com/example-song-1')">
+            <img src="https://i.ytimg.com/vi/JnnV-wcAJ5M/sddefault.jpg" alt="Album cover featuring a dramatic red guitar against a dark stormy background with lightning bolts and rock vibes" class="w-full h-32 object-cover rounded mb-2" />
+            <h3 class="text-lg font-semibold">Kahwasmara</h3>
+            <p class="text-sm"><em>Adif Mahendra</em></p>
+        </div>
+        <div class="song-card p-4 text-center" onclick="openLyrics('https://genius.com/example-song-2')">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/69acc39f-9afa-4991-861c-cb0efeeb3d06.png" alt="Artwork showing a red heart shaped microphone on a velvet stage with curtain backdrop in a gothic concert hall style" class="w-full h-32 object-cover rounded mb-2" />
+            <h3 class="text-lg font-semibold">Shape of You</h3>
+            <p class="text-sm"><em>Ed Sheeran</em></p>
+        </div>
+        <div class="song-card p-4 text-center" onclick="openLyrics('https://genius.com/example-song-3')">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d6e0bfba-7730-47ee-b509-b0adc76b112c.png" alt="Illustration of a blood red rose blooming with thorns on a black canvas representing passion and melancholy in pop art style" class="w-full h-32 object-cover rounded mb-2" />
+            <h3 class="text-lg font-semibold">Watermelon Sugar</h3>
+            <p class="text-sm"><em>Harry Styles</em></p>
+        </div>
+        <div class="song-card p-4 text-center" onclick="openLyrics('https://genius.com/example-song-4')">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/aa11195f-0689-4183-afd8-fe73aff8ecab.png" alt="Digital art of a silhouette singer with red lips and eyes against a crimson neon cityscape resembling a futuristic fantasy" class="w-full h-32 object-cover rounded mb-2" />
+            <h3 class="text-lg font-semibold">Levitating</h3>
+            <p class="text-sm"><em>Dua Lipa</em></p>
+        </div>
+        <div class="song-card p-4 text-center" onclick="openLyrics('https://genius.com/example-song-5')">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/40fd6c66-cfe2-4bd0-b185-c28ee36732c6.png" alt="Poster style image of a crimson fireball explosion with musical notes and guitar strings in a high-energy rock poster aesthetic" class="w-full h-32 object-cover rounded mb-2" />
+            <h3 class="text-lg font-semibold">Stay</h3>
+            <p class="text-sm"><em>The Kid LAROI</em></p>
+        </div>
+        <div class="song-card p-4 text-center" onclick="openLyrics('https://genius.com/example-song-6')">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/419f284c-87b6-44ee-9eac-f40e5af170d0.png" alt="Conceptual art showing flowing red melodies as waves crashing on cliffs with a starry dark sky conveying emotional depth" class="w-full h-32 object-cover rounded mb-2" />
+            <h3 class="text-lg font-semibold">As It Was</h3>
+            <p class="text-sm"><em>Harry Styles</em></p>
+        </div>
+        <div class="song-card p-4 text-center" onclick="openLyrics('https://genius.com/example-song-7')">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/db8014e0-39c0-436a-af66-b4fd22088ea9.png" alt="Vibrant red acoustic guitar lying on a charcoal carpet with soft shadows and spotlight creating an intimate music studio vibe" class="w-full h-32 object-cover rounded mb-2" />
+            <h3 class="text-lg font-semibold">Drivers License</h3>
+            <p class="text-sm"><em>Olivia Rodrigo</em></p>
+        </div>
+        <div class="song-card p-4 text-center" onclick="openLyrics('https://genius.com/example-song-8')">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9b7699c0-bcbb-4dda-a5d3-c171e0a8f493.png" alt="Stylized image of a ruby microphone stand with steam rising in a dimly lit room evoking a sultry jazz lounge atmosphere" class="w-full h-32 object-cover rounded mb-2" />
+            <h3 class="text-lg font-semibold">Bad Habit</h3>
+            <p class="text-sm"><em>Steve Lacy</em></p>
+        </div>
+    </div>
+
+    <script>
+        const songs = document.querySelectorAll('.song-card');
+        const searchInput = document.getElementById('search');
+
+        function searchSongs() {
+            const query = searchInput.value.toLowerCase();
+            songs.forEach(song => {
+                const title = song.querySelector('h3').textContent.toLowerCase();
+                const artist = song.querySelector('p').textContent.toLowerCase();
+                if (title.includes(query) || artist.includes(query)) {
+                    song.style.display = 'block';
+                } else {
+                    song.style.display = 'none';
+                }
+            });
+        }
+
+        function openLyrics(url) {
+            window.open(url, '_blank'); // Redirect to external lyric site
+        }
+    </script>
+</body>
+</html>
+</content>
+</create_file>
